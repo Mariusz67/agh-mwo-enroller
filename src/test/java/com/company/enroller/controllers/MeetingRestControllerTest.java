@@ -25,32 +25,32 @@ import com.company.enroller.persistence.MeetingService;
 import com.company.enroller.persistence.ParticipantService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ParticipantRestController.class)
-public class ParticipantRestControllerTest {
+@WebMvcTest(MeetingRestController.class)
+public class MeetingRestControllerTest {
 
-	@Autowired
-	private MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
-	@MockBean
-	private MeetingService meetingService;
+    @MockBean
+    private MeetingService meetingService;
 
-	@MockBean
-	private ParticipantService participantService;
-
-	@Test
-	public void getParticipants() throws Exception {
-		Participant participant = new Participant();
-		participant.setLogin("testlogin");
-		participant.setPassword("testpassword");
-
-		Collection<Participant> allParticipants = singletonList(participant);
-		given(participantService.getAll()).willReturn(allParticipants);
-
-		mvc.perform(get("/participants").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].login", is(participant.getLogin())));
-	}
+    @MockBean
+    private ParticipantService participantService;
 
 
+    @Test
+    public void getMeetings() throws Exception {
+        Meeting meeting = new Meeting();
+        meeting.setTitle("spotkanie");
+        meeting.setDescription("opis");
+        meeting.setDate("22042022");
+
+        Collection<Meeting> allMeetings = singletonList(meeting);
+        given(meetingService.getAll()).willReturn(allMeetings);
+
+        mvc.perform(get("/meetings").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].title", is(meeting.getTitle())));
+    }
 
 
 
