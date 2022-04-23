@@ -41,15 +41,15 @@ public class MeetingRestControllerTest {
     @Test
     public void getMeetings() throws Exception {
         Meeting meeting = new Meeting();
-        meeting.setTitle("spotkanie");
-        meeting.setDescription("opis");
-        meeting.setDate("22042022");
+        meeting.setTitle("title");
+        meeting.setDescription("description");
+        meeting.setDate("01012022");
 
         Collection<Meeting> allMeetings = singletonList(meeting);
         given(meetingService.getAll()).willReturn(allMeetings);
 
         mvc.perform(get("/meetings").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].title", is(meeting.getTitle())));
+                .andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].date", is(meeting.getDate())));
     }
 
 
