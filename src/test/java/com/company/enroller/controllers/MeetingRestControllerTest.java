@@ -49,7 +49,7 @@ public class MeetingRestControllerTest {
         given(meetingService.getAll()).willReturn(allMeetings);
 
         mvc.perform(get("/meetings").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].date", is(meeting.getDate())));
+                .andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].title", is(meeting.getTitle())));
     }
 
 
