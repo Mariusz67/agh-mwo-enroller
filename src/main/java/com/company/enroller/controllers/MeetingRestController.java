@@ -33,16 +33,16 @@ public class MeetingRestController {
         return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
     }
 
-//    @RequestMapping(value = "", method = RequestMethod.POST)
-//    public ResponseEntity<?> registerMeeting(@RequestBody Meeting meeting) {
-//        Meeting foundMeeting = meetingService.findById(meeting.getId());
-//        if (foundMeeting != null) {
-//            return new ResponseEntity("Unable to create. Meeting already exists with this ID " + meeting.getId()
-//                    , HttpStatus.CONFLICT);
-//        }
-//        meetingService.add(meeting);
-//        return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
-//    }
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public ResponseEntity<?> registerMeeting(@RequestBody Meeting meeting) {
+        Meeting foundMeeting = meetingService.findById(meeting.getId());
+        if (foundMeeting != null) {
+            return new ResponseEntity("Unable to create. Meeting already exists with this ID " + meeting.getId()
+                    , HttpStatus.CONFLICT);
+        }
+        meetingService.add(meeting);
+        return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteMeeting(@PathVariable("id") long id) {
